@@ -3,6 +3,50 @@
 
 from tkinter import *
 
+def main():
+    # create window
+    root = Tk()
+
+    # create canvas (for drawing) and place into root
+    canvas = Canvas(root, width=400, height=400)
+
+    # create ball
+    ball = Ball(canvas, 8, 3, 1, 200, 200, "blue")
+
+    # bind to keys
+    for key in ("w", "s", "o", "l", "q"):
+        root.bind(key, keylistener)
+
+    # update root elements
+    canvas.pack()
+    animate()
+    root.mainloop()
+
+def keylistener(event):
+    '''handles all key input
+
+    :event: event passed by Tk mainloop
+    '''
+    if event.char == 'q':
+        # exit out of application
+        root.destroy()
+        return
+    if event.char == 'w':
+        pass
+    if event.char == 's':
+        pass
+    if event.char == 'o':
+        pass
+    if event.char == 'l':
+        pass
+
+def animate():
+    '''animation loop (async)
+    '''
+    ball.updatePosition()
+    root.after(20, animate)
+
+
 class Ball():
     '''Ball for pong'''
 
@@ -40,45 +84,6 @@ class Ball():
                 self._vy *= -1
         self._canvas.move(self._oval, self._vx, self._vy)
 
-def keylistener(event):
-    '''handles all key input
 
-    :event: event passed by Tk mainloop
-    '''
-    if event.char == 'q':
-        # exit out of application
-        root.destroy()
-        return
-    if event.char == 'w':
-        pass
-    if event.char == 's':
-        pass
-    if event.char == 'o':
-        pass
-    if event.char == 'l':
-        pass
-
-# create window
-root = Tk()
-
-# create canvas (for drawing) and place into root
-canvas = Canvas(root, width=400, height=400)
-
-# create ball
-ball = Ball(canvas, 8, 3, 1, 200, 200, "blue")
-
-# bind to keys
-for key in ("w", "s", "o", "l", "q"):
-    root.bind(key, keylistener)
-
-# update root elements
-canvas.pack()
-
-def animate():
-    '''animation loop (async)
-    '''
-    ball.updatePosition()
-    root.after(20, animate)
-
-animate()
-root.mainloop()
+if __name__ == '__main__':
+    main()
