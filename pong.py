@@ -3,7 +3,12 @@
 
 from tkinter import *
 
+ball = None
+root = None
+
 def main():
+    global ball, root
+
     # create window
     root = Tk()
 
@@ -21,6 +26,7 @@ def main():
     canvas.pack()
     animate()
     root.mainloop()
+
 
 def keylistener(event):
     '''handles all key input
@@ -83,6 +89,27 @@ class Ball():
             if coords[1] + self._vy < 0:
                 self._vy *= -1
         self._canvas.move(self._oval, self._vx, self._vy)
+
+
+class Paddle():
+
+    '''Paddle for pong'''
+
+    def __init__(self, canvas, xCenter, width, height, yInc, yCenter = None, color = "black"):
+        '''init Paddle
+
+        :xCenter: where the center paddle will lie in x-direction
+        :width: width of paddle
+        :height: height of paddle
+        :yInc: how much to increment paddle when moved
+        :yCenter: where to position center of paddle in y-direction (optional)
+        :color: color of paddle (optional)
+        '''
+        self._canvas = canvas
+        self._width = width
+        self._height = height
+        self._yInc = yInc
+        self._color = color
 
 
 if __name__ == '__main__':
